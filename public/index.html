@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <title>ПАО "Гранит". Мастерплан.</title>
+
+    <!--Bootstrap-->
+  <!--   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script> -->
+
+  
+    <!--QGIS sources-->
+    <link rel="stylesheet" type="text/css" href="https://storage.yandexcloud.net/granitmasterplan40222esp/htmlQgisViewer16042022/Qgis2threejs.css">
+    <script src="https://storage.yandexcloud.net/granitmasterplan40222esp/htmlQgisViewer16042022/threejs/three.min.js"></script>
+    <script src="https://storage.yandexcloud.net/granitmasterplan40222esp/htmlQgisViewer16042022/threejs/OrbitControls.js"></script>
+    <script src="https://storage.yandexcloud.net/granitmasterplan40222esp/htmlQgisViewer16042022/threejs/ViewHelper.js"></script>
+    <script src="https://storage.yandexcloud.net/granitmasterplan40222esp/htmlQgisViewer16042022/Qgis2threejs.js"></script>
+    <script src="https://storage.yandexcloud.net/granitmasterplan40222esp/htmlQgisViewer16042022/dat-gui/dat.gui.min.js"></script>
+    <script src="https://storage.yandexcloud.net/granitmasterplan40222esp/htmlQgisViewer16042022/dat-gui/dat.gui.min.js"></script>
+    
+    <!--Vue-->
+    <script src="https://unpkg.com/vue@next" defer></script>
+    <script src="./app.js" defer ></script>  
+</head>
+<body>
+    <div id="granitApp">
+        <nav>
+            <button @click="switchQGIS">Смотреть GIS модель</button>
+            <button @click="switchForge">Смотреть BIM модель</button>
+    
+        </nav>
+       
+           <!--  <div id="view"> -->
+            <div v-bind:id="givenAttr">
+                <div id="northarrow"></div>
+                <div id="navigation"></div>
+              </div>
+              
+              <!-- popup -->
+              <div id="popup">
+                <div id="closebtn">&times;</div>
+                <div id="popupbar"></div>
+                <div id="popupbody">
+                  <div id="popupcontent"></div>
+              
+                  <!-- query result -->
+                  <div id="queryresult">
+                    <table id="qr_coords_table">
+                      <caption>Clicked coordinates <div id="zoomtopoint" class="action-zoom zoombtn"></div></caption>
+                      <tr><td id="qr_coords"></td></tr>
+                    </table>
+              
+                    <table id="qr_layername_table">
+                      <caption>Layer <div id="zoomtolayer" class="action-zoom zoombtn"></div></caption>
+                      <tr><td id="qr_layername"></td></tr>
+                    </table>
+              
+                    <table id="qr_attrs_table">
+                      <caption>Attributes</caption>
+                    </table>
+              
+                    <!-- camera actions and measure tool -->
+                    <div id="orbitbtn" class="action-btn action-orbit">Orbit</div>
+                    <div id="measurebtn" class="action-btn">Measure distance</div>
+                  </div>
+              
+                  <!-- page info -->
+                  <div id="pageinfo">
+                    <h1>Current View URL</h1>
+                    <div><input id="urlbox" type="text"></div>
+              
+                    <h1>Usage</h1>
+                    <table id="usage">
+                      <tr><td colspan="2" class="star">Mouse</td></tr>
+                      <tr><td>Left button + Move</td><td>Orbit</td></tr>
+                      <tr><td>Mouse Wheel</td><td>Zoom</td></tr>
+                      <tr><td>Right button + Move</td><td>Pan</td></tr>
+              
+                      <tr><td colspan="2" class="star">Keys</td></tr>
+                      <tr><td>Arrow keys</td><td>Move Horizontally</td></tr>
+                      <tr><td>Shift + Arrow keys</td><td>Orbit</td></tr>
+                      <tr><td>Ctrl + Arrow keys</td><td>Rotate</td></tr>
+                      <tr><td>Shift + Ctrl + Up / Down</td><td>Zoom In / Out</td></tr>
+                      <tr><td>L</td><td>Toggle Label Visibility</td></tr>
+                      <tr><td>R</td><td>Start / Stop Orbit Animation</td></tr>
+                      <tr><td>W</td><td>Wireframe Mode</td></tr>
+                      <tr><td>Shift + R</td><td>Reset Camera Position</td></tr>
+                      <tr><td>Shift + S</td><td>Save Image</td></tr>
+                    </table>
+              
+                    <h1>About</h1>
+                    <div id="about">
+                      This page was made with <a href="https://www.qgis.org/">QGIS</a> and <a href="https://github.com/minorua/Qgis2threejs">Qgis2threejs</a> plugin (version 2.7.1).
+                      <div>Powered by <a href="https://threejs.org/">three.js</a>,
+                      <a href="https://code.google.com/p/dat-gui/">dat-gui</a>
+                      <span id="lib_proj4js"> and <a href="https://trac.osgeo.org/proj4js/">Proj4js</a></span>.</div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              
+              <!-- progress bar -->
+              <div id="progress"><div id="progressbar"></div></div>
+              
+              <!-- header and footer -->
+              <div id="header"></div>
+              <div id="footer"></div>
+              
+              <!-- animation -->
+              <div id="narrativebox" class="ef1">
+                <div id="narbody">
+              
+                </div>
+                <div id="nextbtn"></div>
+              </div>
+
+              <script src="./qgis/qgisscript.js"></script>
+
+        </div>  
+        <footer></footer>
+    </div>
+    
+</body>
+</html>
+
+<!-- 
+// local files
+// you have to put your scripts into the public folder. 
+// that way webpack simply copy these files as it is.
+Vue.loadScript("/js/jquery-2.2.4.min.js")
+
+// cdn
+Vue.loadScript("https://maps.googleapis.com/maps/api/js") -->
