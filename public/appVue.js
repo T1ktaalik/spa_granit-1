@@ -3,7 +3,7 @@ const appGranit = Vue.createApp({
   data: ()=>{
     return {
       viewerID: {
-        qgisViewerID: 'qgisViewerID',
+        qgisViewerID: 'view',
         forgeViewerID: 'forgeViewerID'
       }, 
       givenAttr: 'default'
@@ -20,8 +20,11 @@ const appGranit = Vue.createApp({
       this.givenAttr = this.viewerID.forgeViewerID
       console.log(this.givenAttr)
       return this.givenAttr
+    },
+    loadQGIS() {
+      
+
     }
-    
   }
 })
 appGranit.mount('#granitApp')
