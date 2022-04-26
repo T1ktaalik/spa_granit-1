@@ -28,7 +28,7 @@
   <!-- Favicon  -->
   <link rel="shortcut icon" href="./media/logogranit.svg">
 
- 
+
 
   <!--Vue-->
   <script src="https://unpkg.com/vue@next" defer></script>
@@ -37,92 +37,110 @@
 
 
 </head>
-<body class="container">
-    <div id="view" style="height: 40vh">
-      <div id="northarrow"></div>
-      <div id="navigation"></div>
-      <!-- popup показывает атрибутику зданий по клику -->
-      <!-- popup -->
-      <div id="popup">
-        <div id="closebtn">&times;</div>
-        <div id="popupbar"></div>
-        <div id="popupbody">
-          <div id="popupcontent"></div>
-        </div>
-       <!--  работать здесь -->
-        <!-- query result -->
-        <div id="queryresult">
-          <table id="qr_coords_table">
-            <caption>Clicked coordinates <div id="zoomtopoint" class="action-zoom zoombtn"></div>
-            </caption>
-            <tr>
-              <td id="qr_coords"></td>
-            </tr>
-          </table>
-          <table id="qr_layername_table">
-            <caption>Layer <div id="zoomtolayer" class="action-zoom zoombtn"></div>
-            </caption>
-            <tr>
-              <td id="qr_layername"></td>
-            </tr>
-          </table>
-          <table id="qr_attrs_table">
-            <caption>Attributes</caption>
-          </table>
-          <!-- camera actions and measure tool -->
-          <div id="orbitbtn" class="action-btn action-orbit">Orbit</div>
-          <div id="measurebtn" class="action-btn">Measure distance</div>
-        </div>
-      </div>
-      <div>
-        <!-- progress bar -->
-        <div id="progress">
-          <div id="progressbar"></div>
-        </div>
-        <!-- animation -->
-        <div id="narrativebox" class="ef1">
-          <div id="narbody">
-          </div>
-          <div id="nextbtn">
-          </div>
-        </div>
-      </div>
-      <script
-        src="https://storage.yandexcloud.net/granitmasterplan40222esp/htmlQgisViewer16042022/threejs/three.min.js"></script>
-      <script
-        src="https://storage.yandexcloud.net/granitmasterplan40222esp/htmlQgisViewer16042022/threejs/OrbitControls.js"></script>
-      <script
-        src="https://storage.yandexcloud.net/granitmasterplan40222esp/htmlQgisViewer16042022/threejs/ViewHelper.js"></script>
-      <script
-        src="https://storage.yandexcloud.net/granitmasterplan40222esp/htmlQgisViewer16042022/Qgis2threejs.js"></script>
-      <!-- <script
-              src="https://storage.yandexcloud.net/granitmasterplan40222esp/htmlQgisViewer16042022/dat-gui/dat.gui.min.js"></script> -->
 
-      <script src="./js/custom_dat.gui.js"></script>
-
-      <script src="js/custom_dat-gui_panel.js"></script>
-      <!-- <script
-              src="https://storage.yandexcloud.net/granitmasterplan40222esp/htmlQgisViewer16042022/dat-gui_panel.js"></script> -->
-      <script src="js/QGISviewer.js"></script>
+<body>
+  <!-- Fixed navbar by Bootstrap: https://getbootstrap.com/examples/navbar-fixed-top/ -->
+  <nav class="navbar navbar-default navbar-fixed-top">
+    <div class="container-fluid">
+      <ul class="nav navbar-nav left">
+        <li>
+          <a href="https://www.paogranit.ru/" target="_blank">
+            <img alt="Autodesk Forge" src="/media/logogranit.svg" height="20">
+          </a>
+        </li>
+      </ul>
+      <h2 class="text-center ">ПАО "Гранит". Концепция строительства технопарка в Ростове-на-Дону</h2>
     </div>
-    <div class="container-fluid fill">
-      <div class="row fill">
-        <div class="col-sm-4 fill">
-          <div class="panel panel-default fill">
-            <div class="panel-heading" data-toggle="tooltip">
-              Проекты и модели
-              <span id="refreshBuckets" class="glyphicon glyphicon-refresh" style="cursor: pointer"></span>
+  </nav>
+  <!-- End of navbar -->
+  <div class="container-fluid fill">
+    <div class="row fill">
+      <div class="col-sm-4 fill">
+        <!-- <div class="panel panel-default fill"> -->
+
+        <div id="view" style="height: 40vh" class="end-0">
+          <div id="northarrow"></div>
+          <div id="navigation"></div>
+          <!-- popup показывает атрибутику зданий по клику -->
+          <!-- popup -->
+          <div id="popup">
+            <div id="closebtn">&times;</div>
+            <div id="popupbar"></div>
+            <div id="popupbody">
+              <div id="popupcontent"></div>
             </div>
-            <div id="appBuckets">
-              tree here
+            <!--  работать здесь -->
+            <!-- query result -->
+            <div id="queryresult">
+              <table id="qr_coords_table">
+                <caption>Clicked coordinates <div id="zoomtopoint" class="action-zoom zoombtn"></div>
+                </caption>
+                <tr>
+                  <td id="qr_coords"></td>
+                </tr>
+              </table>
+              <table id="qr_layername_table">
+                <caption>Layer <div id="zoomtolayer" class="action-zoom zoombtn"></div>
+                </caption>
+                <tr>
+                  <td id="qr_layername"></td>
+                </tr>
+              </table>
+              <table id="qr_attrs_table">
+                <caption>Attributes</caption>
+              </table>
+              <!-- camera actions and measure tool -->
+              <div id="orbitbtn" class="action-btn action-orbit">Orbit</div>
+              <div id="measurebtn" class="action-btn">Measure distance</div>
             </div>
           </div>
+          <div>
+            <!-- progress bar -->
+            <div id="progress">
+              <div id="progressbar"></div>
+            </div>
+            <!-- animation -->
+            <div id="narrativebox" class="ef1">
+              <div id="narbody">
+              </div>
+              <div id="nextbtn">
+              </div>
+            </div>
+          </div>
+          <script
+            src="https://storage.yandexcloud.net/granitmasterplan40222esp/htmlQgisViewer16042022/threejs/three.min.js"></script>
+          <script
+            src="https://storage.yandexcloud.net/granitmasterplan40222esp/htmlQgisViewer16042022/threejs/OrbitControls.js"></script>
+          <script
+            src="https://storage.yandexcloud.net/granitmasterplan40222esp/htmlQgisViewer16042022/threejs/ViewHelper.js"></script>
+          <script
+            src="https://storage.yandexcloud.net/granitmasterplan40222esp/htmlQgisViewer16042022/Qgis2threejs.js"></script>
+          <!-- <script
+                          src="https://storage.yandexcloud.net/granitmasterplan40222esp/htmlQgisViewer16042022/dat-gui/dat.gui.min.js"></script> -->
+          <!-- 
+                <script src="./js/custom_dat.gui.js"></script>
+
+                <script src="js/custom_dat-gui_panel.js"></script> -->
+          <!-- <script
+                          src="https://storage.yandexcloud.net/granitmasterplan40222esp/htmlQgisViewer16042022/dat-gui_panel.js"></script> -->
+          <script src="js/QGISviewer.js"></script>
         </div>
-        <div class="col-sm-8 fill">
-          <div id="forgeViewer"></div>
+        <div class="panel panel-default ">
+          <div class="panel-heading" data-toggle="tooltip">
+            Проекты и модели
+            <span id="refreshBuckets" class="glyphicon glyphicon-refresh" style="cursor: pointer"></span>
+          </div>
+          <div id="appBuckets">
+            tree here
+          </div>
         </div>
+
+      </div>
+      <div class="col-sm-8 fill">
+        <div id="forgeViewer"></div>
       </div>
     </div>
-  
+  </div>
 </body>
+
 </html>
